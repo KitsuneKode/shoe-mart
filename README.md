@@ -1,36 +1,173 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Footwear Website
+
+A modern Next.js e-commerce website for footwear built with TypeScript, Tailwind CSS, shadcn/ui, Prisma, PostgreSQL, and Zustand.
+
+## Features
+
+- 🛍️ **Product Catalog**: Display footwear products from Nike and Adidas
+- 🎨 **Modern UI**: Built with shadcn/ui components and Tailwind CSS
+- 🗄️ **Database**: PostgreSQL with Prisma ORM
+- 📱 **Responsive Design**: Works on all devices
+- ⚡ **Fast Performance**: Built with Next.js 15 and Turbopack
+- 🎯 **Type Safety**: Full TypeScript support
+
+## Tech Stack
+
+- **Framework**: Next.js 15 with App Router
+- **Styling**: Tailwind CSS v4
+- **UI Components**: shadcn/ui
+- **Database**: PostgreSQL
+- **ORM**: Prisma
+- **State Management**: Zustand
+- **Package Manager**: Bun
+- **Language**: TypeScript
+
+## Prerequisites
+
+- Node.js 18+ or Bun
+- PostgreSQL database (local or remote)
 
 ## Getting Started
 
-First, run the development server:
+### 1. Clone the repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
+git clone <your-repo-url>
+cd footwear-website
+```
+
+### 2. Install dependencies
+
+```bash
+bun install
+```
+
+### 3. Set up environment variables
+
+Create a `.env` file in the root directory with the following variables:
+
+```env
+DATABASE_URL="postgresql://username:password@localhost:5432/footwear_db"
+BETTER_AUTH_SECRET="your-super-secret-key-change-this-in-production"
+BETTER_AUTH_URL="http://localhost:3000"
+NEXT_PUBLIC_APP_URL="http://localhost:3000"
+```
+
+**Important Notes:**
+- Replace `username:password` with your actual PostgreSQL credentials
+- Generate a secure random string for `BETTER_AUTH_SECRET` (you can use `openssl rand -base64 32`)
+- Update URLs for production deployment
+
+### 4. Set up the database
+
+1. Make sure PostgreSQL is running locally
+2. Create a database named `footwear_db`
+
+### 5. Run database migrations
+
+```bash
+bunx prisma migrate dev --name init
+```
+
+### 6. Seed the database
+
+```bash
+bun run db:seed
+```
+
+### 7. Start the development server
+
+```bash
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the website.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Database Schema
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The application uses a `Product` model with the following fields:
 
-## Learn More
+- `id`: Unique identifier
+- `name`: Product name
+- `brand`: Brand name (Nike, Adidas, etc.)
+- `description`: Product description
+- `price`: Product price
+- `imageUrl`: Product image URL
+- `category`: Product category (Running, Basketball, Lifestyle)
+- `sizes`: Available sizes array
+- `colors`: Available colors array
+- `inStock`: Stock availability
+- `createdAt`: Creation timestamp
+- `updatedAt`: Last update timestamp
 
-To learn more about Next.js, take a look at the following resources:
+## Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+footwear-website/
+├── app/
+│   ├── api/
+│   │   └── products/
+│   │       └── route.ts          # API endpoint for products
+│   ├── globals.css               # Global styles
+│   ├── layout.tsx                # Root layout
+│   └── page.tsx                  # Homepage
+├── components/
+│   ├── ui/                       # shadcn/ui components
+│   │   ├── badge.tsx
+│   │   ├── button.tsx
+│   │   └── card.tsx
+│   └── ProductCard.tsx           # Product display component
+├── lib/
+│   ├── store.ts                  # Zustand store
+│   └── utils.ts                  # Utility functions
+├── prisma/
+│   ├── schema.prisma             # Database schema
+│   └── seed.ts                   # Database seeder
+└── public/                       # Static assets
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Available Scripts
 
-## Deploy on Vercel
+- `bun dev` - Start development server
+- `bun build` - Build for production
+- `bun start` - Start production server
+- `bun lint` - Run ESLint
+- `bun run db:seed` - Seed the database with sample data
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## API Endpoints
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `GET /api/products` - Fetch all products
+
+## Customization
+
+### Adding New Products
+
+1. Edit `prisma/seed.ts` to add new products
+2. Run `bun run db:seed` to update the database
+
+### Styling
+
+The project uses Tailwind CSS with shadcn/ui components. You can customize the design by:
+
+1. Modifying `app/globals.css` for global styles
+2. Updating component styles in `components/ui/`
+3. Adding new shadcn/ui components with `bunx shadcn@latest add <component-name>`
+
+## Deployment
+
+The application can be deployed to Vercel, Netlify, or any other platform that supports Next.js.
+
+1. Build the application: `bun build`
+2. Set up environment variables in your deployment platform
+3. Deploy the built application
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
+
+## License
+
+MIT License - see LICENSE file for details.
