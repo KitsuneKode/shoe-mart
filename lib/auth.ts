@@ -27,5 +27,4 @@ export const auth = betterAuth({
     },
   },
   // Add public app URL configuration
-  publicAppUrl: config.app.url,
 });
