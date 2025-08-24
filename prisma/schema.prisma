@@ -14,18 +14,22 @@ datasource db {
 }
 
 model Product {
-  id          String   @id @default(cuid())
-  name        String
-  brand       String
-  description String?
-  price       Float
-  imageUrl    String?
-  category    String
-  sizes       String[] // Array of available sizes
-  colors      String[] // Array of available colors
-  inStock     Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id            String   @id @default(cuid())
+  name          String
+  brand         String
+  description   String?
+  price         Float
+  imageUrl      String?
+  category      String
+  sizes         String[] // Array of available sizes
+  colors        String[] // Array of available colors
+  inStock       Boolean  @default(true)
+  isBestSeller  Boolean  @default(false)
+  colorCount    Int?
+  discount      Int? // Percentage discount
+  isSustainable Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
   @@map("products")
 }

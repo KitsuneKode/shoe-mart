@@ -3,6 +3,8 @@
 import { useEffect } from 'react';
 import { useAppStore } from '@/lib/store';
 import { ProductCard } from '@/components/ProductCard';
+import { Navbar } from '@/components/Navbar';
+import { Footer } from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Loader2, ShoppingBag, User, LogOut } from 'lucide-react';
@@ -44,64 +46,8 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center gap-2">
-              <ShoppingBag className="h-8 w-8 text-blue-600" />
-              <h1 className="text-2xl font-bold text-gray-900">
-                Footwear Store
-              </h1>
-            </div>
-            <div className="flex items-center gap-4">
-              <Badge variant="outline" className="text-sm">
-                {products.length} Products
-              </Badge>
-              {sessionLoading ? (
-                <Loader2 className="h-5 w-5 animate-spin" />
-              ) : session ? (
-                <div className="flex items-center gap-3">
-                  <div className="flex items-center gap-2">
-                    <User className="h-5 w-5 text-gray-600" />
-                    <span className="text-sm font-medium text-gray-700">
-                      {session.user.name || session.user.email}
-                    </span>
-                  </div>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={async () => {
-                      await authClient.signOut();
-                      window.location.href = '/';
-                    }}
-                    className="flex items-center gap-2"
-                  >
-                    <LogOut className="h-4 w-4" />
-                    Sign Out
-                  </Button>
-                </div>
-              ) : (
-                <div className="flex items-center gap-2">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => (window.location.href = '/signin')}
-                  >
-                    Sign In
-                  </Button>
-                  <Button
-                    size="sm"
-                    onClick={() => (window.location.href = '/signup')}
-                  >
-                    Sign Up
-                  </Button>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </header>
+      {/* Navbar */}
+      <Navbar cartItemCount={2} />
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -138,13 +84,7 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-white border-t mt-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center text-gray-600">
-            <p>&copy; 2024 Footwear Store. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer location="Croatia" />
     </div>
   );
 }

@@ -9,17 +9,21 @@ async function main() {
   // Seed Nike products
   const nikeProducts = [
     {
-      name: 'Air Max 270',
+      name: "Air Force 1 Mid '07",
       brand: 'Nike',
       description:
-        "The Nike Air Max 270 delivers unrivaled, all-day comfort. The shoe's design draws inspiration from Air Max icons, showcasing Nike's greatest innovation with its large window and fresh array of colors.",
-      price: 150.0,
+        "The Nike Air Force 1 Mid '07 features a classic design with premium leather construction and the iconic Air-Sole unit for lightweight cushioning.",
+      price: 98.3,
       imageUrl:
         'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400',
-      category: 'Running',
+      category: "Men's Shoes",
       sizes: ['7', '8', '9', '10', '11', '12'],
-      colors: ['Black', 'White', 'Red'],
+      colors: ['Black/Red', 'White/Black', 'Blue'],
       inStock: true,
+      isBestSeller: true,
+      colorCount: 6,
+      discount: null,
+      isSustainable: false,
     },
     {
       name: 'Air Jordan 1 Retro High',
@@ -33,6 +37,10 @@ async function main() {
       sizes: ['7', '8', '9', '10', '11', '12'],
       colors: ['Black/Red', 'White/Black', 'Blue'],
       inStock: true,
+      isBestSeller: false,
+      colorCount: 3,
+      discount: null,
+      isSustainable: false,
     },
     {
       name: 'Zoom Fly 5',
@@ -46,6 +54,10 @@ async function main() {
       sizes: ['7', '8', '9', '10', '11', '12'],
       colors: ['Gray', 'Blue', 'Green'],
       inStock: true,
+      isBestSeller: false,
+      colorCount: 3,
+      discount: null,
+      isSustainable: false,
     },
   ];
 
@@ -63,6 +75,10 @@ async function main() {
       sizes: ['7', '8', '9', '10', '11', '12'],
       colors: ['Black', 'White', 'Blue'],
       inStock: true,
+      isBestSeller: false,
+      colorCount: 3,
+      discount: null,
+      isSustainable: false,
     },
     {
       name: 'Stan Smith',
@@ -76,6 +92,10 @@ async function main() {
       sizes: ['7', '8', '9', '10', '11', '12'],
       colors: ['White/Green', 'White/Blue', 'Black'],
       inStock: true,
+      isBestSeller: false,
+      colorCount: 3,
+      discount: null,
+      isSustainable: false,
     },
     {
       name: 'NMD R1',
@@ -89,6 +109,10 @@ async function main() {
       sizes: ['7', '8', '9', '10', '11', '12'],
       colors: ['Black/Red', 'Gray', 'Blue'],
       inStock: true,
+      isBestSeller: false,
+      colorCount: 3,
+      discount: null,
+      isSustainable: false,
     },
   ];
 
