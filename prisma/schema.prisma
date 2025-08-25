@@ -34,13 +34,13 @@ model Product {
   @@map("products")
 }
 
-// Better Auth Models
+// Better Auth Models - Following Better Auth requirements exactly
 
 model User {
-  id            String   @id @default(cuid())
+  id            String   @id @default(uuid())
+  name          String?
   email         String   @unique
   emailVerified Boolean  @default(false)
-  name          String?
   image         String?
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
@@ -52,7 +52,7 @@ model User {
 }
 
 model Account {
-  id                String  @id @default(cuid())
+  id                String  @id @default(uuid())
   userId            String
   type              String
   provider          String
@@ -67,36 +67,31 @@ model Account {
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  accountId             String
-  providerId            String
-  accessToken           String?
-  refreshToken          String?
-  idToken               String?
+  // Additional fields for our custom implementation
   accessTokenExpiresAt  DateTime?
   refreshTokenExpiresAt DateTime?
   password              String?
-  createdAt             DateTime
-  updatedAt             DateTime
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt()
 
   @@unique([provider, providerAccountId])
   @@map("accounts")
 }
 
 model Session {
-  id           String   @id @default(cuid())
+  id           String   @id @default(uuid())
   sessionToken String   @unique
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  expiresAt DateTime
-  token     String
-  createdAt DateTime
-  updatedAt DateTime
+  // Additional fields for our custom implementation
+  token     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt()
   ipAddress String?
   userAgent String?
 
-  @@unique([token])
   @@map("sessions")
 }
 
@@ -118,4 +113,13 @@ model Verification {
   updatedAt  DateTime?
 
   @@map("verification")
+}
+
+model Guest {
+  id           String   @id @default(uuid())
+  sessionToken String   @unique
+  createdAt    DateTime @default(now())
+  expiresAt    DateTime
+
+  @@map("guests")
 }

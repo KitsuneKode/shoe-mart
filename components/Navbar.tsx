@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Search, ShoppingCart, Menu, X } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 interface NavbarProps {
   cartItemCount?: number;
@@ -23,8 +24,13 @@ export function Navbar({ cartItemCount = 0 }: NavbarProps) {
   ];
 
   return (
-    <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className="bg-white border-b border-gray-200 sticky top-0 z-100">
+      <div
+        className={cn(
+          'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-50',
+          isMobileMenuOpen && 'h-screen'
+        )}
+      >
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
@@ -83,6 +89,17 @@ export function Navbar({ cartItemCount = 0 }: NavbarProps) {
                 </Badge>
               )}
             </Button>
+
+            {/* Checkout */}
+            <Link href="/checkout">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="flex items-center gap-2"
+              >
+                <span className="text-sm font-medium">Checkout</span>
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -104,7 +121,7 @@ export function Navbar({ cartItemCount = 0 }: NavbarProps) {
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <div className="md:hidden border-t border-gray-200">
+          <div className="md:hidden border-t max-h-screen border-gray-200">
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navigationLinks.map((link) => (
                 <Link
@@ -138,6 +155,13 @@ export function Navbar({ cartItemCount = 0 }: NavbarProps) {
                     </Badge>
                   )}
                 </Button>
+
+                {/* Mobile Checkout */}
+                <Link href="/checkout" className="w-full">
+                  <Button variant="ghost" className="w-full justify-start">
+                    <span className="mr-2">Checkout</span>
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>

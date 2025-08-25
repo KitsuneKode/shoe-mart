@@ -24,17 +24,22 @@ interface ProductCardProps {
   variant?: 'default' | 'compact';
 }
 
-export function ProductCard({ product }: ProductCardProps) {
+export function ProductCard({
+  product,
+  variant = 'default',
+}: ProductCardProps) {
+  const isCompact = variant === 'compact';
+
   return (
-    <Card className="group overflow-hidden hover:shadow-lg transition-all duration-300 border-0 bg-white cursor-pointer p-0 rounded-sm hover:border-gray-500">
+    <Card className="group overflow-hidden hover:shadow-lg transition-all duration-300 border-0 bg-white cursor-pointer p-0 rounded-sm hover:border-gray-500 h-full">
       <CardHeader className="p-0 relative">
-        <div className="relative h-64 bg-gray-50">
+        <div className={`relative ${isCompact ? 'h-56' : 'h-72'} bg-gray-50`}>
           <Image
-            src={product.imageUrl || '/placeholder-shoe.jpg'}
+            src={product.imageUrl || '/shoes/shoe-1.jpg'}
             alt={product.name}
             fill
             className="object-cover group-hover:scale-105 transition-transform duration-300"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 33vw"
           />
 
           {/* Best Seller Badge */}
